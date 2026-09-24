@@ -2792,7 +2792,7 @@ nav.addEventListener('focusin',function(){set(false)});window.addEventListener('
 /* perf 1: pause CSS animations of sections that are far off-screen (less main-thread work per frame) */
 (function(){if(!window.IntersectionObserver)return;
 var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('idle',!e.isIntersecting)})},{rootMargin:'40% 0px'});
-[].forEach.call(document.querySelectorAll('section,footer,.dvhold'),function(e){io.observe(e)})})();
+[].forEach.call(document.querySelectorAll('section,.dvhold'),function(e){if(e.id==='finale'||e.closest&&e.closest('footer'))return;io.observe(e)})})();
 /* perf 2: inertial mouse-wheel scrolling (desktop mouse only; trackpads/touch stay native) */
 (function(){
 if(matchMedia('(pointer:coarse)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
