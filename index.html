@@ -2695,8 +2695,10 @@ onScroll();
   function c0(){return crashed}
   function loop(){rk.classList.remove('loop');void rk.offsetWidth;rk.classList.add('loop');clearTimeout(lt);lt=setTimeout(function(){rk.classList.remove('loop')},1600)}
   function cl(x){return Math.max(0,Math.min(1,x))}
-  var spent=false;
-  function upd(){
+  var spent=false,raf=0;
+  function upd(){if(spent)return;if(!raf)raf=requestAnimationFrame(frame)}
+  function frame(){
+    raf=0;
     if(spent)return;
     end=Math.max(200,ft.offsetTop-innerHeight*.6);
     var y=window.scrollY||0,p=cl(y/end);
