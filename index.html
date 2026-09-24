@@ -1774,7 +1774,6 @@ details.qa.closing summary .bub{border-color:var(--line);background:var(--glass)
 .dnote+.dnote{margin-top:10px}
 @media (max-width:700px){.smk i{filter:none;will-change:transform,opacity;backface-visibility:hidden;background:radial-gradient(circle,rgba(var(--g),var(--g),var(--g),.5),rgba(90,84,82,.3) 30%,rgba(90,84,82,.12) 52%,rgba(90,84,82,0) 72%)}.smk .veil{-webkit-mask-image:none;mask-image:none;-webkit-mask-size:auto;mask-size:auto}.smk.go .veil{animation:vin .5s ease-out .5s forwards,vout2 2.1s ease-in-out 2s forwards}}
 @keyframes vout2{from{opacity:.94}to{opacity:0}}
-.idle,.idle *,.idle *::before,.idle *::after{animation-play-state:paused!important}
 </style>
 </head><body>
 
@@ -2789,10 +2788,6 @@ window.addEventListener('scroll',function(){var y=window.scrollY||0,d=y-ly;ly=y;
 nav.addEventListener('focusin',function(){set(false)});window.addEventListener('resize',place);window.addEventListener('load',function(){place();vis()});place();vis();})();
 </script>
 <script>
-/* perf 1: pause CSS animations of sections that are far off-screen (less main-thread work per frame) */
-(function(){if(!window.IntersectionObserver)return;
-var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('idle',!e.isIntersecting)})},{rootMargin:'40% 0px'});
-[].forEach.call(document.querySelectorAll('section,.dvhold'),function(e){if(e.id==='finale'||e.closest&&e.closest('footer'))return;io.observe(e)})})();
 /* perf 2: inertial mouse-wheel scrolling (desktop mouse only; trackpads/touch stay native) */
 (function(){
 if(matchMedia('(pointer:coarse)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
