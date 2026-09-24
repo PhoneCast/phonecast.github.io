@@ -1772,7 +1772,10 @@ details.qa.closing summary .bub{border-color:var(--line);background:var(--glass)
 }
 @media (max-width:700px){.dxok{font-size:8px;letter-spacing:.1em;padding:4px 7px;top:-22px;clip-path:polygon(5px 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%,0 5px);box-shadow:0 0 14px rgba(255,42,31,.6)}}
 .dnote+.dnote{margin-top:10px}
-@media (max-width:700px){.smk{display:none}}
+@media (max-width:700px){
+.smk i:nth-child(even){display:none}
+@keyframes smk{0%{opacity:0;transform:translate(0,40px) scale(.3)}14%{opacity:.75}42%{opacity:.7;transform:translate(calc(var(--x)*.4),-30px) scale(1.05)}100%{opacity:0;transform:translate(var(--x),-120px) scale(1.6)}}
+}
 </style>
 </head><body>
 
