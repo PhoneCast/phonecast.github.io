@@ -1774,6 +1774,7 @@ details.qa.closing summary .bub{border-color:var(--line);background:var(--glass)
 .dnote+.dnote{margin-top:10px}
 @media (max-width:700px){.smk i{filter:none;will-change:transform,opacity;backface-visibility:hidden;background:radial-gradient(circle,rgba(var(--g),var(--g),var(--g),.5),rgba(90,84,82,.3) 30%,rgba(90,84,82,.12) 52%,rgba(90,84,82,0) 72%)}.smk .veil{-webkit-mask-image:none;mask-image:none;-webkit-mask-size:auto;mask-size:auto}.smk.go .veil{animation:vin .5s ease-out .5s forwards,vout2 2.1s ease-in-out 2s forwards}}
 @keyframes vout2{from{opacity:.94}to{opacity:0}}
+.idle,.idle *,.idle *::before,.idle *::after{animation-play-state:paused!important}
 </style>
 </head><body>
 
@@ -2786,6 +2787,33 @@ window.addEventListener('scroll',function(){var y=window.scrollY||0,d=y-ly;ly=y;
   var kf=nav.matches(':focus-within')&&document.activeElement&&document.activeElement.matches&&document.activeElement.matches(':focus-visible');
   if(acc>2&&!kf)set(true);else if(acc<-70)set(false)},{passive:true});
 nav.addEventListener('focusin',function(){set(false)});window.addEventListener('resize',place);window.addEventListener('load',function(){place();vis()});place();vis();})();
+</script>
+<script>
+/* perf 1: pause CSS animations of sections that are far off-screen (less main-thread work per frame) */
+(function(){if(!window.IntersectionObserver)return;
+var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('idle',!e.isIntersecting)})},{rootMargin:'40% 0px'});
+[].forEach.call(document.querySelectorAll('section,footer,.dvhold'),function(e){io.observe(e)})})();
+/* perf 2: inertial mouse-wheel scrolling (desktop mouse only; trackpads/touch stay native) */
+(function(){
+if(matchMedia('(pointer:coarse)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+var cur=scrollY,tgt=scrollY,raf=0,last=0;
+function mx(){return document.documentElement.scrollHeight-innerHeight}
+function inner(el){while(el&&el!==document.body&&el!==document.documentElement){if(el.nodeType===1){var s=getComputedStyle(el);if(/(auto|scroll)/.test(s.overflowY)&&el.scrollHeight>el.clientHeight+1)return true}el=el.parentNode}return false}
+function tick(t){var dt=Math.min(50,t-(last||t));last=t;var d=tgt-cur;
+  if(Math.abs(d)<.5){cur=tgt;scrollTo({top:cur,behavior:'instant'});raf=0;last=0;return}
+  cur+=d*(1-Math.pow(1-.13,dt/16.7));scrollTo({top:cur,behavior:'instant'});raf=requestAnimationFrame(tick)}
+addEventListener('wheel',function(e){
+  if(e.ctrlKey||e.defaultPrevented||Math.abs(e.deltaX)>Math.abs(e.deltaY))return;
+  var dy=e.deltaY;if(e.deltaMode===1)dy*=40;else if(e.deltaMode===2)dy*=innerHeight;
+  else if(Math.abs(dy)<50)return;
+  if(inner(e.target))return;
+  e.preventDefault();
+  if(!raf){cur=scrollY;tgt=cur}
+  tgt=Math.max(0,Math.min(mx(),tgt+dy));
+  if(!raf){last=0;raf=requestAnimationFrame(tick)}
+},{passive:false});
+addEventListener('scroll',function(){if(!raf){cur=tgt=scrollY}},{passive:true});
+})();
 </script>
 
 </body>
