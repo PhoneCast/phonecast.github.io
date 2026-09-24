@@ -2695,10 +2695,8 @@ onScroll();
   function c0(){return crashed}
   function loop(){rk.classList.remove('loop');void rk.offsetWidth;rk.classList.add('loop');clearTimeout(lt);lt=setTimeout(function(){rk.classList.remove('loop')},1600)}
   function cl(x){return Math.max(0,Math.min(1,x))}
-  var spent=false,raf=0;
-  function upd(){if(spent)return;if(!raf)raf=requestAnimationFrame(frame)}
-  function frame(){
-    raf=0;
+  var spent=false;
+  function upd(){
     if(spent)return;
     end=Math.max(200,ft.offsetTop-innerHeight*.6);
     var y=window.scrollY||0,p=cl(y/end);
@@ -2788,29 +2786,6 @@ window.addEventListener('scroll',function(){var y=window.scrollY||0,d=y-ly;ly=y;
   var kf=nav.matches(':focus-within')&&document.activeElement&&document.activeElement.matches&&document.activeElement.matches(':focus-visible');
   if(acc>2&&!kf)set(true);else if(acc<-70)set(false)},{passive:true});
 nav.addEventListener('focusin',function(){set(false)});window.addEventListener('resize',place);window.addEventListener('load',function(){place();vis()});place();vis();})();
-</script>
-<script>
-/* perf 2: inertial mouse-wheel scrolling (desktop mouse only; trackpads/touch stay native) */
-(function(){
-if(matchMedia('(pointer:coarse)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-var cur=scrollY,tgt=scrollY,raf=0,last=0;
-function mx(){return document.documentElement.scrollHeight-innerHeight}
-function inner(el){while(el&&el!==document.body&&el!==document.documentElement){if(el.nodeType===1){var s=getComputedStyle(el);if(/(auto|scroll)/.test(s.overflowY)&&el.scrollHeight>el.clientHeight+1)return true}el=el.parentNode}return false}
-function tick(t){var dt=Math.min(50,t-(last||t));last=t;var d=tgt-cur;
-  if(Math.abs(d)<.5){cur=tgt;scrollTo({top:cur,behavior:'instant'});raf=0;last=0;return}
-  cur+=d*(1-Math.pow(1-.13,dt/16.7));scrollTo({top:cur,behavior:'instant'});raf=requestAnimationFrame(tick)}
-addEventListener('wheel',function(e){
-  if(e.ctrlKey||e.defaultPrevented||Math.abs(e.deltaX)>Math.abs(e.deltaY))return;
-  var dy=e.deltaY;if(e.deltaMode===1)dy*=40;else if(e.deltaMode===2)dy*=innerHeight;
-  else if(Math.abs(dy)<50)return;
-  if(inner(e.target))return;
-  e.preventDefault();
-  if(!raf){cur=scrollY;tgt=cur}
-  tgt=Math.max(0,Math.min(mx(),tgt+dy));
-  if(!raf){last=0;raf=requestAnimationFrame(tick)}
-},{passive:false});
-addEventListener('scroll',function(){if(!raf){cur=tgt=scrollY}},{passive:true});
-})();
 </script>
 
 </body>
