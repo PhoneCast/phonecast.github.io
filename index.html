@@ -14,9 +14,20 @@
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="theme-color" content="#070506">
+<link rel="preload" as="image" href="assets/hero.jpg">
+<link rel="preload" as="image" href="assets/logo.webp">
+<link rel="preload" as="image" href="assets/wordmark.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Figtree:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>html.pre{opacity:0;animation:prefail 0s 2.6s forwards}html.pre.go{opacity:1;transition:opacity .5s ease}@keyframes prefail{to{opacity:1}}</style>
+<script>(function(){var d=document.documentElement,done=false,a=false,b=false;d.classList.add('pre');
+function go(){if(done)return;done=true;d.classList.add('go');setTimeout(function(){d.classList.remove('pre','go')},650)}
+function chk(){if(a&&b)go()}
+setTimeout(go,2200);
+window.addEventListener('load',function(){a=true;chk()});
+function fr(){var f=document.fonts;if(f&&f.ready){f.ready.then(function(){b=true;chk()})}else{b=true;chk()}}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',fr);else fr()})();</script>
 <style>
 :root{
   color-scheme:dark;
