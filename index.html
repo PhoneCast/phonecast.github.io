@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Figtree:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>html.pre{opacity:0;animation:prefail 0s 2.6s forwards}html.pre.go{opacity:1;transition:opacity .5s ease}@keyframes prefail{to{opacity:1}}</style>
+<style>html.pre{opacity:0;animation:prefail 0s 2.6s forwards}html.pre.go{opacity:1;transition:opacity .35s ease}html.pre:not(.go) *,html.pre:not(.go) *::before,html.pre:not(.go) *::after{animation-play-state:paused!important}@keyframes prefail{to{opacity:1}}</style>
 <script>(function(){var d=document.documentElement,done=false,a=false,b=false;d.classList.add('pre');
 function go(){if(done)return;done=true;d.classList.add('go');setTimeout(function(){d.classList.remove('pre','go')},650)}
 function chk(){if(a&&b)go()}
