@@ -2664,7 +2664,7 @@ onScroll();
   function stop(){tms.forEach(clearTimeout);tms=[];if(dsc)dsc.classList.remove('s1','s2','s3','pw','on')}
   function frame(t){
     requestAnimationFrame(frame);if(document.hidden)return;
-    var r=sec.getBoundingClientRect(),tg=cl((innerHeight*.92-r.top)/(innerHeight*.78));
+    var r=sec.getBoundingClientRect(),tg=innerWidth>700?cl((innerHeight*.92-r.top)/(innerHeight*.46)):cl((innerHeight*.92-r.top)/(innerHeight*.78));
     cur+=(tg-cur)*.14;if(Math.abs(tg-cur)<.002)cur=tg;
     var pr=cur;f.style.width=(pr*100)+'%';f.style.opacity=1;h.style.left=(pr*100)+'%';h.style.opacity=pr<.995&&pr>.01?1:0;
     pc.textContent=Math.round(pr*100)+'%';
