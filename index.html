@@ -388,13 +388,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 .smk.go i{animation:smk var(--du) ease-out both;animation-delay:var(--d)}
 @media (max-width:700px){
 .smk i{display:none}
-.smk .veil{-webkit-mask-image:none;mask-image:none;-webkit-mask-size:auto;mask-size:auto}
-.smk.go .veil{animation:vin .5s ease-out .5s forwards,vout2 2.1s ease-in-out 2s forwards}
-.smk .veil.v2,.smk .veil.v3{display:none}
+.smk .veil{-webkit-mask-image:none;mask-image:none;-webkit-mask-size:auto;mask-size:auto;inset:-20%}
+.smk.go .veil{animation:vcloud 4.1s cubic-bezier(.22,.7,.4,1) .5s forwards}
+.smk .veil.v2,.smk .veil.v3{display:none;inset:-20%}
 .smk.go .veil.v2,.smk.go .veil.v3{display:block}
-.smk.go .veil.v2{animation:vin .5s ease-out .7s forwards,vout2 2.1s ease-in-out 2.2s forwards;transform:translate(-6%,4%) scale(1.08)}
-.smk.go .veil.v3{animation:vin .5s ease-out .35s forwards,vout2 2.1s ease-in-out 1.85s forwards;transform:translate(7%,-3%) scale(1.05)}
-@keyframes vout2{to{opacity:0}}
+.smk.go .veil.v2{animation:vcloud 4.1s cubic-bezier(.22,.7,.4,1) .7s forwards;transform:translate(-6%,4%) scale(1.08)}
+.smk.go .veil.v3{animation:vcloud 4.1s cubic-bezier(.22,.7,.4,1) .35s forwards;transform:translate(7%,-3%) scale(1.05)}
+@keyframes vcloud{0%{opacity:0}14%{opacity:.94}55%{opacity:.7}100%{opacity:0}}
 }
 
 @keyframes smfl{0%{opacity:0}12%{opacity:1}100%{opacity:0}}
