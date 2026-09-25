@@ -594,7 +594,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .hs[data-ph="6"] .hd{opacity:0}
 .hcur{position:absolute;left:0;top:0;width:22px;height:22px;z-index:5;fill:#fff;stroke:#000;stroke-width:1.2;filter:drop-shadow(0 2px 4px rgba(0,0,0,.7));pointer-events:none;transition:opacity .3s}
 .hs[data-ph="4"] .hcur,.hs[data-ph="5"] .hcur,.hs[data-ph="6"] .hcur{opacity:0}
-.hlv{opacity:0;transition:opacity .35s}
+.hlv{opacity:0;transition:opacity .35s;position:absolute;inset:0}
+.hlvv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hlv::before{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(4,2,2,.75),rgba(4,2,2,.15) 45%,rgba(4,2,2,.35));pointer-events:none}
 .hs[data-ph="5"] .hlv{opacity:1;transition-delay:.5s}
 .hs[data-ph="6"] .hlv{opacity:0;transition-delay:.35s}
 /* qr + scan */
@@ -764,6 +766,8 @@ h1 .kw.lit,h1.alllit .kw{color:var(--ember);text-shadow:0 0 26px rgba(255,42,31,
 .slabel{position:absolute;left:0;right:0;text-align:center;color:var(--bone)}
 .lb{position:absolute;left:16px;top:44px;background:var(--ember);padding:5px 11px;border-radius:3px;display:flex;gap:8px;align-items:center;color:#fff}
 .lb .dot{background:#fff;box-shadow:none;width:7px;height:7px}
+.hlv .lb{padding:3px 7px;border-radius:2px;gap:5px;font-size:8.5px}
+.hlv .lb .dot{width:5px;height:5px}
 .meters{position:absolute;left:16px;right:16px;bottom:88px;display:flex;flex-direction:column;gap:10px}
 .mrow{display:grid;grid-template-columns:86px 1fr;gap:10px;align-items:center;color:var(--dim)}
 .eq{display:flex;gap:3px;align-items:flex-end;height:20px}
@@ -1297,6 +1301,7 @@ html[lang=es] .shint .l-en,html:not([lang=es]) .shint .l-es{display:none}
 @keyframes rnew{0%,38%{border-color:var(--line);box-shadow:none}44%,100%{border-color:var(--ember);box-shadow:0 0 22px rgba(255,42,31,.4)}}
 /* s2 */
 .pv2,.pv3{position:absolute;left:16px;right:16px;top:104px;height:210px;border-radius:20px;overflow:hidden;background:linear-gradient(160deg,#1c0b0a,#080404);border:1px solid var(--line)}
+.pv3v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .pv2 .gline,.pv3 .gline{left:-40px;top:112px;width:360px;height:9px;transform:rotate(-20deg)}
 .pv2 .gring,.pv3 .gring{right:34px;top:40px;width:58px;height:58px}
 .pv2 .vw{position:absolute;left:10px;bottom:10px;font-size:10px;letter-spacing:.1em;color:var(--dim);background:rgba(0,0,0,.6);padding:5px 9px;border-radius:100px}
@@ -1845,19 +1850,8 @@ details.qa.closing summary .bub{border-color:var(--line);background:var(--glass)
           <div class="plab mono" data-i="scanPc">Scan with PhoneCast</div>
         </div>
         <div class="hlv">
-          <div class="pgr"></div>
+          <video class="hlvv" id="hlvv" muted playsinline loop preload="none"><source src="assets/hlv-demo.webm" type="video/webm"><source src="assets/hlv-demo.mp4" type="video/mp4"></video>
           <div class="lb mono" style="left:12px;top:12px"><span class="dot"></span>LIVE<em class="vw" id="vw">0</em></div>
-          <div class="ppip"></div>
-          <div class="hchat">
-            <div class="hm"><b>nova_kid</b>LET'S GOOO 🚀</div>
-            <div class="hm"><b>bruma</b>that flick 🔥🔥</div>
-            <div class="hm"><b>quesadilla_ok</b>LUL 😂</div>
-            <div class="hm"><b>pixel_mami</b>GG ❤️</div>
-            <div class="hm"><b>turbo_tio</b>clip it!! 👀</div>
-          </div>
-          <span class="fe" style="right:110px;--dx:-30px;animation-delay:0s">❤️</span><span class="fe" style="right:150px;--dx:20px;animation-delay:.9s">🔥</span><span class="fe" style="right:190px;--dx:-20px;animation-delay:1.7s">😂</span><span class="fe" style="right:90px;--dx:30px;animation-delay:2.4s">👏</span><span class="fe" style="right:130px;--dx:10px;animation-delay:3s">🚀</span>
-          <svg class="hsp" viewBox="0 0 200 40" preserveAspectRatio="none"><path d="M0 30L14 26L28 31L42 20L56 24L70 12L84 22L98 14L112 26L126 9L140 18L154 8L168 16L182 6L200 12"/></svg>
-          <div class="ptoast"><span class="ember" style="font-size:18px">♥</span><div><b data-i="a1">New follower</b><small>Follow</small></div></div>
         </div>
         <svg class="hcur" id="hcur" viewBox="0 0 24 24"><path d="M3 2l16 9-7 2-3 7z"/></svg>
         <div class="hwipe"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i></div>
@@ -1942,7 +1936,7 @@ details.qa.closing summary .bub{border-color:var(--line);background:var(--glass)
         <!-- 3 chat -->
         <div class="scr s3"><div class="grid"></div>
           <div class="ah"><span class="al"><i class="ad"></i>PhoneCast</span><span class="ar mono">CHAT</span></div>
-          <div class="pv3"><div class="gline"></div><div class="gring"></div></div>
+          <div class="pv3"><video class="pv3v" id="pv3v" muted playsinline loop preload="none"><source src="assets/chat-demo.webm" type="video/webm"><source src="assets/chat-demo.mp4" type="video/mp4"></video></div>
           <div class="chat">
             <div class="msg"><b>nova_kid</b>LET'S GOOO 🚀</div>
             <div class="msg"><b>bruma</b>that flick 🔥🔥</div>
@@ -2795,6 +2789,25 @@ window.addEventListener('scroll',function(){var y=window.scrollY||0,d=y-ly;ly=y;
   var kf=nav.matches(':focus-within')&&document.activeElement&&document.activeElement.matches&&document.activeElement.matches(':focus-visible');
   if(acc>2&&!kf)set(true);else if(acc<-70)set(false)},{passive:true});
 nav.addEventListener('focusin',function(){set(false)});window.addEventListener('resize',place);window.addEventListener('load',function(){place();vis()});place();vis();})();
+
+/* hero monitor: real product-demo clip plays only while the "live" phase is showing and the hero is on screen */
+(function(){var hs=document.getElementById('hs'),hlvv=document.getElementById('hlvv');if(!hs||!hlvv)return;
+function sync(){var on=hs.getAttribute('data-ph')==='5'&&!document.hidden;
+  if(on){if(hlvv.readyState<1)hlvv.load();if(hlvv.paused){var p=hlvv.play();if(p&&p.catch)p.catch(function(){})}}
+  else{hlvv.pause()}}
+new MutationObserver(sync).observe(hs,{attributes:true,attributeFilter:['data-ph']});
+document.addEventListener('visibilitychange',sync);
+sync();
+})();
+/* "what it does" phone mockup: real chat+game clip plays only on the "floating chat" step (3) */
+(function(){var stg=document.getElementById('stage'),pv3v=document.getElementById('pv3v');if(!stg||!pv3v)return;
+function sync(){var on=stg.getAttribute('data-step')==='3'&&!document.hidden;
+  if(on){if(pv3v.readyState<1)pv3v.load();if(pv3v.paused){var p=pv3v.play();if(p&&p.catch)p.catch(function(){})}}
+  else{pv3v.pause()}}
+new MutationObserver(sync).observe(stg,{attributes:true,attributeFilter:['data-step']});
+document.addEventListener('visibilitychange',sync);
+sync();
+})();
 </script>
 
 </body>
